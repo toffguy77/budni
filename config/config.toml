@@ -1,0 +1,69 @@
+# config file for budni bot
+
+title = "config file for budni bot"
+
+[owner]
+name = "thatguy"
+
+[bot]
+token = "1314233866:AAHrkSyAZMNXPTcnVFoFIwwJxkcH3dsap2I"
+firstname = "Budni Bot"
+lastname = "The Unique One"
+
+[feeds]
+[[feeds.facebook]]
+    accounts = [
+        "one",
+        "two",
+        "three"
+        ]
+    hashtags = [
+        "one",
+        "two",
+        "three"
+        ]
+[[feeds.instagram]]
+    accounts = [
+        "one",
+        "two",
+        "three"
+        ]
+    hashtags = [
+        "one",
+        "two",
+        "three"
+        ]
+[[feeds.twitter]]
+    accounts = [
+        "one",
+        "two",
+        "three"
+        ]
+    hashtags = [
+        "one",
+        "two",
+        "three"
+        ]
+[[feeds.rss]]
+    accounts = [
+        "one",
+        "two",
+        "three"
+        ]
+
+[quotes]
+    nyse = [
+        "one",
+        "two",
+        "three"
+        ]
+    amex = [
+        "one",
+        "two",
+        "three"
+        ]
+    nasdaq = [
+        "one",
+        "two",
+        "three"
+        ]
