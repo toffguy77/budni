@@ -16,7 +16,7 @@ func main() {
 	sugar := logger.Sugar()
 	ctx := context.WithValue(context.Background(), types.ZapLogger("logger"), sugar)
 
-	cfg, err := config.GetCfg(ctx, "config/config.toml")
+	cfg, err := config.GetCfg(ctx, "../../config/config.toml")
 	if err != nil {
 		log.Fatalf("budni: %v", err)
 	}

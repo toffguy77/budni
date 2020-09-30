@@ -45,11 +45,10 @@ lastname = "The Unique One"
         "three"
         ]
 [[feeds.rss]]
-    accounts = [
-        "one",
-        "two",
-        "three"
+    links = [
+        "https://lenta.ru/rss"
         ]
+    timeout = 600
 
 [quotes]
     nyse = [
