@@ -3,7 +3,6 @@ package rss
 
 import (
 	"context"
-	"fmt"
 	"sync"
 	"time"
 
@@ -21,9 +20,11 @@ func MakeFeed(ctx context.Context, exitChan chan int) chan *rss.Item {
 	rssFeeds := cfg.Get("feeds.rss.links").([]interface{})
 	logger.Infof("rss: got the following rss feeds to fetch: %v", rssFeeds)
 	rssChan := make(chan *rss.Item)
+	var wg sync.WaitGroup
 	for _, rssFeed := range rssFeeds {
-		fmt.Println(rssFeed)
+		wg.Add(1)
 		go func(ctx context.Context, rssFeed string) {
+			defer wg.Done()
 			for {
 				select {
 				case <-exitChan:
@@ -36,6 +37,7 @@ func MakeFeed(ctx context.Context, exitChan chan int) chan *rss.Item {
 			}
 		}(ctx, rssFeed.(string))
 	}
+	wg.Wait()
 	return rssChan
 }
 
@@ -51,22 +53,17 @@ func readFead(ctx context.Context, rssFeed string) *rss.Item {
 
 	}
 
-	var (
-		wg   sync.WaitGroup
-		item *rss.Item
-	)
+	var item *rss.Item
 
 	for {
 		for _, item = range feed.Items {
-			wg.Add(1)
+			// TODO: use goroutine and WaitGroup
 			news := func(item *rss.Item) *rss.Item {
-				defer wg.Done()
 				logger.Infof("one more news: %v, %v\n", item.Read, item.Title)
 				return item
 			}(item)
 			return news
 		}
-		wg.Wait()
 		time.Sleep(time.Duration(timeout) * time.Second)
 		logger.Info("rss: gone for an update")
 		err = feed.Update()
